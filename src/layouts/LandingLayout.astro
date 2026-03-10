@@ -17,7 +17,7 @@ const { title, description = "Alquila material acu√°tico y deportivo de forma f√
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body>
@@ -27,18 +27,45 @@ const { title, description = "Alquila material acu√°tico y deportivo de forma f√
 
 <style is:global>
   :root {
-    --primary: #0ea5e9;
-    --primary-dark: #0284c7;
-    --primary-light: #38bdf8;
-    --secondary: #06b6d4;
-    --accent: #f59e0b;
-    --dark: #0f172a;
-    --dark-light: #1e293b;
-    --gray: #64748b;
-    --gray-light: #94a3b8;
-    --light: #f8fafc;
+    /* Primary Blues - Professional palette */
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --primary-lighter: #60a5fa;
+    --secondary: #0ea5e9;
+    --accent: #06b6d4;
+    
+    /* Backgrounds */
+    --dark: #0a0e1a;
+    --dark-light: #111827;
+    --dark-card: #1a1f2e;
+    
+    /* Text colors */
+    --gray: #6b7280;
+    --gray-light: #9ca3af;
+    --gray-lighter: #d1d5db;
+    --light: #f3f4f6;
     --white: #ffffff;
-    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    
+    /* Gradients */
+    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    --gradient-light: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(37, 99, 235, 0.1) 0%, transparent 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.3);
+    
+    /* Border radius */
+    --radius-sm: 0.375rem;
+    --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
   }
 
   * {
@@ -57,6 +84,8 @@ const { title, description = "Alquila material acu√°tico y deportivo de forma f√
     color: var(--light);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
@@ -71,68 +100,137 @@ const { title, description = "Alquila material acu√°tico y deportivo de forma f√
 
   .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
   }
 
-  .btn {
+  .section-badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .btn-primary {
-    background: var(--gradient);
-    color: var(--white);
-    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--light);
-    border: 2px solid var(--gray);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
-
-  .section {
-    padding: 6rem 0;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-lighter);
+    margin-bottom: 1rem;
   }
 
   .section-title {
     font-size: 2.5rem;
     font-weight: 800;
-    text-align: center;
+    line-height: 1.2;
     margin-bottom: 1rem;
-    background: var(--gradient);
+    background: linear-gradient(135deg, var(--white) 0%, var(--gray-lighter) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .section-subtitle {
-    text-align: center;
-    color: var(--gray-light);
     font-size: 1.125rem;
+    color: var(--gray-light);
     max-width: 600px;
     margin: 0 auto 3rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--gradient);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary-light);
+    border: 2px solid var(--primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  .section {
+    padding: 6rem 0;
+    position: relative;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.5); }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @media (max-width: 1024px) {
+    .container {
+      padding: 0 1.5rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -142,6 +240,10 @@ const { title, description = "Alquila material acu√°tico y deportivo de forma f√
 
     .section-title {
       font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
     }
   }
 </style>

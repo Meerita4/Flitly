@@ -2,18 +2,21 @@
 const plans = [
   {
     name: "Básico",
-    description: "Para usuarios ocasionales",
+    description: "Perfecto para usuarios ocasionales",
     price: "Gratis",
     period: "",
     features: [
-      "Búsqueda ilimitada",
-      "3 reservas al mes",
-      "Chat con propietarios",
-      "Reseñas y valoraciones",
-      "Soporte por email"
+      { text: "Búsqueda ilimitada", included: true },
+      { text: "3 reservas al mes", included: true },
+      { text: "Chat con propietarios", included: true },
+      { text: "Reseñas y valoraciones", included: true },
+      { text: "Soporte por email", included: true },
+      { text: "Descuentos exclusivos", included: false },
+      { text: "Cancelación gratuita", included: false }
     ],
     cta: "Empezar gratis",
-    popular: false
+    popular: false,
+    highlight: false
   },
   {
     name: "Pro",
@@ -21,15 +24,17 @@ const plans = [
     price: "9,99€",
     period: "/mes",
     features: [
-      "Todo del plan Básico",
-      "Reservas ilimitadas",
-      "Descuentos exclusivos",
-      "Cancelación gratuita 24h",
-      "Soporte prioritario",
-      "Acceso anticipado novedades"
+      { text: "Todo del plan Básico", included: true },
+      { text: "Reservas ilimitadas", included: true },
+      { text: "Descuentos exclusivos", included: true },
+      { text: "Cancelación gratuita 24h", included: true },
+      { text: "Soporte prioritario", included: true },
+      { text: "Acceso anticipado", included: true },
+      { text: "Sin comisión de servicio", included: true }
     ],
     cta: "Próximamente",
-    popular: true
+    popular: true,
+    highlight: true
   },
   {
     name: "Propietario",
@@ -37,30 +42,49 @@ const plans = [
     price: "5%",
     period: " comisión",
     features: [
-      "Publica equipos ilimitados",
-      "Panel de gestión",
-      "Calendario de disponibilidad",
-      "Pagos seguros garantizados",
-      "Verificación de usuarios",
-      "Seguro incluido"
+      { text: "Publica equipos ilimitados", included: true },
+      { text: "Panel de gestión avanzado", included: true },
+      { text: "Calendario de disponibilidad", included: true },
+      { text: "Cobros seguros garantizados", included: true },
+      { text: "Verificación de usuarios", included: true },
+      { text: "Seguro incluido", included: true },
+      { text: "Estadísticas detalladas", included: true }
     ],
     cta: "Próximamente",
-    popular: false
+    popular: false,
+    highlight: false
   }
 ];
 ---
 
 <section class="pricing" id="pricing">
   <div class="container">
-    <h2 class="section-title">Planes simples, precios justos</h2>
-    <p class="section-subtitle">
-      Elige el plan que mejor se adapte a ti. Sin compromisos, cancela cuando quieras.
-    </p>
+    <!-- Section Header -->
+    <div class="section-header">
+      <span class="section-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        Precios
+      </span>
+      <h2 class="section-title">Planes simples,<br/><span class="gradient-text">precios justos</span></h2>
+      <p class="section-subtitle">
+        Elige el plan que mejor se adapte a tu estilo de vida. Sin compromisos, cancela cuando quieras.
+      </p>
+    </div>
 
+    <!-- Pricing Grid -->
     <div class="pricing-grid">
       {plans.map((plan) => (
-        <div class={`pricing-card ${plan.popular ? 'popular' : ''}`}>
-          {plan.popular && <div class="popular-badge">Más popular</div>}
+        <div class={`pricing-card ${plan.popular ? 'popular' : ''} ${plan.highlight ? 'highlight' : ''}`}>
+          {plan.popular && (
+            <div class="popular-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Más popular
+            </div>
+          )}
           
           <div class="pricing-header">
             <h3 class="plan-name">{plan.name}</h3>
@@ -74,11 +98,19 @@ const plans = [
 
           <ul class="pricing-features">
             {plan.features.map((feature) => (
-              <li>
-                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-                {feature}
+              <li class={feature.included ? '' : 'disabled'}>
+                <span class="feature-icon">
+                  {feature.included ? (
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  )}
+                </span>
+                {feature.text}
               </li>
             ))}
           </ul>
@@ -89,52 +121,131 @@ const plans = [
         </div>
       ))}
     </div>
+
+    <!-- Guarantee Banner -->
+    <div class="guarantee-banner">
+      <div class="guarantee-content">
+        <div class="guarantee-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="guarantee-text">
+          <h4>Garantía de satisfacción</h4>
+          <p>Si no estás satisfecho con tu experiencia, te devolvemos el dinero. Sin preguntas.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
   .pricing {
-    padding: 6rem 0;
+    padding: 8rem 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--primary-lighter);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: var(--light);
+  }
+
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: var(--gray-light);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
   }
 
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: start;
+    margin-bottom: 4rem;
   }
 
   .pricing-card {
     position: relative;
-    padding: 2.5rem;
+    padding: 2rem;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
     transition: all 0.3s ease;
   }
 
   .pricing-card:hover {
     background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-4px);
   }
 
-  .pricing-card.popular {
-    background: rgba(14, 165, 233, 0.05);
-    border-color: rgba(14, 165, 233, 0.3);
-    transform: scale(1.05);
+  .pricing-card.highlight {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+    border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
+  }
+
+  .pricing-card.highlight:hover {
+    box-shadow: 0 0 60px rgba(37, 99, 235, 0.2);
   }
 
   .popular-badge {
     position: absolute;
-    top: -12px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.375rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
     background: var(--gradient);
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .popular-badge svg {
+    width: 14px;
+    height: 14px;
   }
 
   .pricing-header {
@@ -142,24 +253,26 @@ const plans = [
   }
 
   .plan-name {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.375rem;
+    color: var(--light);
   }
 
   .plan-description {
     color: var(--gray-light);
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
+    margin: 0;
   }
 
   .pricing-price {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .price {
-    font-size: 3rem;
+    font-size: 2.75rem;
     font-weight: 800;
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -169,43 +282,131 @@ const plans = [
 
   .period {
     color: var(--gray);
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   .pricing-features {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .pricing-features li {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.625rem 0;
-    color: var(--gray-light);
-    font-size: 0.9375rem;
+    gap: 0.625rem;
+    padding: 0.5rem 0;
+    color: var(--gray-lighter);
+    font-size: 0.875rem;
   }
 
-  .check-icon {
-    width: 20px;
-    height: 20px;
-    color: var(--primary);
+  .pricing-features li.disabled {
+    color: var(--gray);
+    opacity: 0.6;
+  }
+
+  .feature-icon {
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
+  }
+
+  .feature-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pricing-features li:not(.disabled) .feature-icon {
+    color: #22c55e;
+  }
+
+  .pricing-features li.disabled .feature-icon {
+    color: var(--gray);
   }
 
   .pricing-card .btn {
     width: 100%;
+    justify-content: center;
   }
 
-  @media (max-width: 968px) {
+  /* Guarantee Banner */
+  .guarantee-banner {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+  }
+
+  .guarantee-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .guarantee-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: var(--radius-lg);
+    color: #22c55e;
+    flex-shrink: 0;
+  }
+
+  .guarantee-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .guarantee-text h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--light);
+  }
+
+  .guarantee-text p {
+    font-size: 0.875rem;
+    color: var(--gray-light);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
     .pricing-grid {
       grid-template-columns: 1fr;
-      max-width: 400px;
-      margin: 0 auto;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3rem;
     }
 
-    .pricing-card.popular {
-      transform: none;
+    .pricing-card.highlight {
+      order: -1;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pricing {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .guarantee-content {
+      flex-direction: column;
+      text-align: center;
     }
   }
 </style>
