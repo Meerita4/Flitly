@@ -1,0 +1,343 @@
+---
+import { Image } from 'astro:assets';
+import menuImg from '../images/menu.jpg';
+import reservaImg from '../images/reserva.jpg';
+import apartadoImg from '../images/apartadoMg.jpg';
+import propietarioImg from '../images/Propietario.jpg';
+
+const screens = [
+  {
+    image: menuImg,
+    alt: "Menú de categorías de Flitly",
+    title: "Explora categorías",
+    description: "Navega entre decenas de categorías deportivas y encuentra tu equipo ideal.",
+    badge: "Descubre"
+  },
+  {
+    image: reservaImg,
+    alt: "Reserva en Flitly",
+    title: "Reserva al instante",
+    description: "Selecciona fechas, confirma y listo. Tu equipo te espera en minutos.",
+    badge: "Reserva"
+  },
+  {
+    image: apartadoImg,
+    alt: "Gestión en Flitly",
+    title: "Gestiona todo",
+    description: "Controla tus reservas, mensajes y pagos desde un solo lugar.",
+    badge: "Gestiona"
+  },
+  {
+    image: propietarioImg,
+    alt: "Panel de propietario en Flitly",
+    title: "Gana como propietario",
+    description: "Publica tu equipo, fija precios y empieza a generar ingresos extra.",
+    badge: "Monetiza"
+  }
+];
+---
+
+<section class="showcase" id="showcase">
+  <div class="showcase-bg">
+    <div class="showcase-gradient-1"></div>
+    <div class="showcase-gradient-2"></div>
+  </div>
+
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <span class="section-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="5" y="2" rx="2" width="14" height="20"/><path d="M12 18h.01"/>
+        </svg>
+        Así funciona
+      </span>
+      <h2 class="section-title">Una experiencia<br/><span class="gradient-text">pensada para ti</span></h2>
+      <p class="section-subtitle">
+        Desde buscar hasta reservar, cada paso está diseñado para que disfrutes sin complicaciones.
+      </p>
+    </div>
+
+    <!-- Screens showcase -->
+    <div class="showcase-grid">
+      {screens.map((screen, index) => (
+        <div class="showcase-item" data-reveal style={`--delay: ${index * 0.15}s`}>
+          <div class="showcase-phone">
+            <div class="showcase-phone-frame">
+              <div class="showcase-phone-notch"></div>
+              <Image 
+                src={screen.image} 
+                alt={screen.alt} 
+                class="showcase-phone-img"
+                widths={[300, 400]}
+                sizes="(max-width: 640px) 250px, 300px"
+              />
+            </div>
+            <div class="showcase-phone-glow"></div>
+          </div>
+          <div class="showcase-info">
+            <span class="showcase-step-badge">{screen.badge}</span>
+            <h3 class="showcase-title">{screen.title}</h3>
+            <p class="showcase-description">{screen.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Intersection Observer for scroll-reveal animations
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+</script>
+
+<style>
+  .showcase {
+    padding: 8rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .showcase-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .showcase-gradient-1 {
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+    filter: blur(60px);
+  }
+
+  .showcase-gradient-2 {
+    position: absolute;
+    bottom: 10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+    filter: blur(60px);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--primary-lighter);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: var(--light);
+  }
+
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: var(--gray-light);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Showcase Grid */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Reveal animation */
+  .showcase-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--delay, 0s);
+    text-align: center;
+  }
+
+  .showcase-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Phone mockup */
+  .showcase-phone {
+    position: relative;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .showcase-phone-frame {
+    width: 220px;
+    height: 440px;
+    background: linear-gradient(145deg, #1a1f2e 0%, #0f1419 100%);
+    border-radius: 2rem;
+    padding: 6px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s ease;
+  }
+
+  .showcase-item:hover .showcase-phone-frame {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(37, 99, 235, 0.3),
+      0 0 40px rgba(37, 99, 235, 0.1);
+  }
+
+  .showcase-phone-notch {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 20px;
+    background: #0a0e1a;
+    border-radius: 0 0 0.75rem 0.75rem;
+    z-index: 10;
+  }
+
+  .showcase-phone-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.6rem;
+    display: block;
+  }
+
+  .showcase-phone-glow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40px;
+    background: var(--gradient);
+    filter: blur(30px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .showcase-item:hover .showcase-phone-glow {
+    opacity: 0.4;
+  }
+
+  /* Info */
+  .showcase-step-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-lighter);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .showcase-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--light);
+    margin-bottom: 0.5rem;
+  }
+
+  .showcase-description {
+    font-size: 0.875rem;
+    color: var(--gray-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .showcase-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .showcase {
+      padding: 5rem 0;
+    }
+
+    .showcase-grid {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+      gap: 3rem;
+    }
+
+    .showcase-phone-frame {
+      width: 240px;
+      height: 480px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+</style>
