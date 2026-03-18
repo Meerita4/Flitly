@@ -33,10 +33,9 @@ const features = [
 ];
 
 const stats = [
-  { value: "2,500+", label: "En lista de espera" },
-  { value: "50+", label: "Categorías de equipo" },
-  { value: "100%", label: "Seguro incluido" },
-  { value: "24/7", label: "Soporte disponible" }
+  { value: "+50", label: "Tipos de equipo" },
+  { value: "100%", label: "Alquiler seguro" },
+  { value: "24/7", label: "Atención inmediata" }
 ];
 ---
 
@@ -232,13 +231,23 @@ const stats = [
   }
 
   .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
   }
 
   .stat-item {
     text-align: center;
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-xl);
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 2px 8px 0 rgba(37,99,235,0.04);
+    transition: background 0.2s;
+  }
+  .stat-item:hover {
+    background: rgba(37,99,235,0.08);
   }
 
   .stat-value {
@@ -263,11 +272,9 @@ const stats = [
     .features-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-
     .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
     }
-
     .section-title {
       font-size: 2.5rem;
     }
@@ -277,24 +284,20 @@ const stats = [
     .features {
       padding: 5rem 0;
     }
-
     .features-grid {
       grid-template-columns: 1fr;
     }
-
     .stats-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
-
     .stats-section {
       padding: 2rem 1.5rem;
     }
-
     .stat-value {
       font-size: 2rem;
     }
-
     .section-title {
       font-size: 2rem;
     }
