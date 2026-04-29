@@ -3,13 +3,22 @@ import { Image } from 'astro:assets';
 import logoSrc from '../images/logo_flitly.png';
 import inicioImg from '../images/inicio.jpg';
 
-const categories = [
+const categoriesES = [
   "Kayaks",
   "Tablas de Surf", 
   "Bicicletas",
   "Paddle Surf",
   "Equipos de Buceo",
   "Esquís"
+];
+
+const categoriesEN = [
+  "Kayaks",
+  "Surfboards",
+  "Bicycles",
+  "Paddleboards",
+  "Diving Gear",
+  "Skis"
 ];
 
 const trustBadges = [
@@ -32,30 +41,30 @@ const trustBadges = [
       <!-- Badge -->
       <div class="hero-badge">
         <span class="badge-pulse"></span>
-        <span>Lanzamiento Año 2026</span>
+        <span data-i18n="hero.badge">Lanzamiento Año 2026</span>
       </div>
 
       <!-- Main Title -->
       <h1 class="hero-title">
-        Alquila
+        <span data-i18n="hero.verb">Alquila</span>
         <span class="title-carousel" id="title-carousel">
           <span class="carousel-word active">Kayaks</span>
         </span>
         <br />
-        <span class="title-highlight">en cualquier lugar</span>
+        <span class="title-highlight" data-i18n="hero.highlight">en cualquier lugar</span>
       </h1>
 
-      <p class="hero-description">
+      <p class="hero-description" data-i18n="hero.description">
         La plataforma que conecta deportistas con propietarios de equipos acuáticos 
         y deportivos. Reserva en segundos, disfruta durante horas.
       </p>
       
       <!-- Trust Badges -->
       <div class="trust-badges">
-        {trustBadges.map((badge) => (
+        {trustBadges.map((badge, i) => (
           <div class="trust-badge">
             <span class="trust-icon">{badge.icon}</span>
-            <span>{badge.text}</span>
+            <span data-i18n={`trust.${i}`}>{badge.text}</span>
           </div>
         ))}
       </div>
@@ -75,16 +84,16 @@ const trustBadges = [
         <div class="floating-card floating-card-1">
           <div class="floating-icon">🏆</div>
           <div class="floating-text">
-            <span class="floating-title">Top Rated</span>
-            <span class="floating-subtitle">Usuario verificado</span>
+            <span class="floating-title" data-i18n="float.1.title">Top Rated</span>
+            <span class="floating-subtitle" data-i18n="float.1.sub">Usuario verificado</span>
           </div>
         </div>
         
         <div class="floating-card floating-card-2">
           <div class="floating-icon">🔒</div>
           <div class="floating-text">
-            <span class="floating-title">100% Seguro</span>
-            <span class="floating-subtitle">Pagos protegidos</span>
+            <span class="floating-title" data-i18n="float.2.title">100% Seguro</span>
+            <span class="floating-subtitle" data-i18n="float.2.sub">Pagos protegidos</span>
           </div>
         </div>
       </div>
@@ -92,21 +101,30 @@ const trustBadges = [
   </div>
 </section>
 
-<script define:vars={{ categories }}>
+<script define:vars={{ categoriesES, categoriesEN }}>
   // Title carousel
   const carouselEl = document.getElementById('title-carousel');
   if (carouselEl) {
+    let currentCategories = localStorage.getItem('flitly-lang') === 'en' ? categoriesEN : categoriesES;
     let currentIndex = 0;
+
+    // Update categories when language changes
+    window.addEventListener('langchange', (e) => {
+      currentCategories = e.detail.categories;
+      currentIndex = 0;
+      const currentWord = carouselEl.querySelector('.carousel-word');
+      if (currentWord) currentWord.textContent = currentCategories[0];
+    });
     
     setInterval(() => {
-      currentIndex = (currentIndex + 1) % categories.length;
+      currentIndex = (currentIndex + 1) % currentCategories.length;
       const currentWord = carouselEl.querySelector('.carousel-word');
       if (currentWord) {
         currentWord.classList.remove('active');
         currentWord.classList.add('exit');
         
         setTimeout(() => {
-          currentWord.textContent = categories[currentIndex];
+          currentWord.textContent = currentCategories[currentIndex];
           currentWord.classList.remove('exit');
           currentWord.classList.add('active');
         }, 300);

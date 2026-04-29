@@ -52,10 +52,10 @@ const stats = [
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
-        Características
+        <span data-i18n="feat.badge">Características</span>
       </span>
-      <h2 class="section-title">Todo lo que necesitas<br/><span class="gradient-text">en una sola app</span></h2>
-      <p class="section-subtitle">
+      <h2 class="section-title"><span data-i18n="feat.title1">Todo lo que necesitas</span><br/><span class="gradient-text" data-i18n="feat.title2">en una sola app</span></h2>
+      <p class="section-subtitle" data-i18n="feat.subtitle">
         Diseñamos Flitly pensando en ti. Una experiencia simple, segura y completa para disfrutar del deporte sin complicaciones.
       </p>
     </div>
@@ -65,8 +65,8 @@ const stats = [
       {features.map((feature, index) => (
         <div class="feature-card" style={`--delay: ${index * 0.1}s`}>
           <div class="feature-icon" set:html={feature.icon} />
-          <h3 class="feature-title">{feature.title}</h3>
-          <p class="feature-description">{feature.description}</p>
+          <h3 class="feature-title" data-i18n={`feat.${index}.title`}>{feature.title}</h3>
+          <p class="feature-description" data-i18n={`feat.${index}.desc`}>{feature.description}</p>
         </div>
       ))}
     </div>
@@ -74,10 +74,10 @@ const stats = [
     <!-- Stats Section -->
     <div class="stats-section">
       <div class="stats-grid">
-        {stats.map((stat) => (
+        {stats.map((stat, index) => (
           <div class="stat-item">
             <span class="stat-value">{stat.value}</span>
-            <span class="stat-label">{stat.label}</span>
+            <span class="stat-label" data-i18n={`stat.${index}.label`}>{stat.label}</span>
           </div>
         ))}
       </div>

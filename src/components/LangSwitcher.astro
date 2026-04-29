@@ -1,0 +1,195 @@
+---
+---
+
+<div class="lang-switcher" id="lang-switcher" role="group" aria-label="Seleccionar idioma / Select language">
+  <button class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+  <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<script>
+  const translations: Record<string, Record<string, string>> = {
+    es: {
+      // Header / Nav
+      'nav.features': 'Características',
+      'nav.pricing': 'Precios',
+      // Hero
+      'hero.badge': 'Lanzamiento Año 2026',
+      'hero.verb': 'Alquila',
+      'hero.highlight': 'en cualquier lugar',
+      'hero.description': 'La plataforma que conecta deportistas con propietarios de equipos acuáticos y deportivos. Reserva en segundos, disfruta durante horas.',
+      'trust.0': 'Sin comisión oculta',
+      'trust.1': 'Seguro incluido',
+      'trust.2': 'Soporte 24/7',
+      'float.1.title': 'Top Rated',
+      'float.1.sub': 'Usuario verificado',
+      'float.2.title': '100% Seguro',
+      'float.2.sub': 'Pagos protegidos',
+      // Features
+      'feat.badge': 'Características',
+      'feat.title1': 'Todo lo que necesitas',
+      'feat.title2': 'en una sola app',
+      'feat.subtitle': 'Diseñamos Flitly pensando en ti. Una experiencia simple, segura y completa para disfrutar del deporte sin complicaciones.',
+      'feat.0.title': 'Busca fácilmente',
+      'feat.0.desc': 'Encuentra el equipo perfecto cerca de ti con filtros avanzados por tipo, precio, disponibilidad y ubicación.',
+      'feat.1.title': 'Reserva instantánea',
+      'feat.1.desc': 'Reserva en segundos desde cualquier dispositivo. Sin llamadas, sin esperas. Todo 100% digital.',
+      'feat.2.title': '100% Seguro',
+      'feat.2.desc': 'Todos los alquileres están protegidos con seguro incluido. Pagos seguros y verificados.',
+      'feat.3.title': 'Chat integrado',
+      'feat.3.desc': 'Comunícate directamente con el propietario para resolver cualquier duda antes de reservar.',
+      'feat.4.title': 'Reseñas verificadas',
+      'feat.4.desc': 'Lee opiniones reales de otros usuarios y toma decisiones informadas antes de cada reserva.',
+      'feat.5.title': 'Genera ingresos',
+      'feat.5.desc': '¿Tienes equipo sin usar? Ponlo a trabajar y genera ingresos extra cada mes de forma segura.',
+      'stat.0.label': 'Tipos de equipo',
+      'stat.1.label': 'Alquiler seguro',
+      'stat.2.label': 'Atención inmediata',
+      // AppShowcase
+      'showcase.badge': 'Así funciona',
+      'showcase.title1': 'Una experiencia',
+      'showcase.title2': 'pensada para ti',
+      'showcase.subtitle': 'Desde buscar hasta reservar, cada paso está diseñado para que disfrutes sin complicaciones.',
+      'screen.0.badge': 'Descubre',
+      'screen.0.title': 'Explora categorías',
+      'screen.0.desc': 'Navega entre decenas de categorías deportivas y encuentra tu equipo ideal.',
+      'screen.1.badge': 'Reserva',
+      'screen.1.title': 'Reserva al instante',
+      'screen.1.desc': 'Selecciona fechas, confirma y listo. Tu equipo te espera en minutos.',
+      'screen.2.badge': 'Gestiona',
+      'screen.2.title': 'Gestiona todo',
+      'screen.2.desc': 'Controla tus reservas, mensajes y pagos desde un solo lugar.',
+      'screen.3.badge': 'Monetiza',
+      'screen.3.title': 'Gana como propietario',
+      'screen.3.desc': 'Publica tu equipo, fija precios y empieza a generar ingresos extra.',
+    },
+    en: {
+      // Header / Nav
+      'nav.features': 'Features',
+      'nav.pricing': 'Pricing',
+      // Hero
+      'hero.badge': 'Launching Year 2026',
+      'hero.verb': 'Rent',
+      'hero.highlight': 'anywhere',
+      'hero.description': 'The platform connecting sports enthusiasts with equipment owners. Book in seconds, enjoy for hours.',
+      'trust.0': 'No hidden fees',
+      'trust.1': 'Insurance included',
+      'trust.2': '24/7 Support',
+      'float.1.title': 'Top Rated',
+      'float.1.sub': 'Verified user',
+      'float.2.title': '100% Safe',
+      'float.2.sub': 'Protected payments',
+      // Features
+      'feat.badge': 'Features',
+      'feat.title1': 'Everything you need',
+      'feat.title2': 'in one app',
+      'feat.subtitle': 'We designed Flitly with you in mind. A simple, secure and complete experience to enjoy sports without hassle.',
+      'feat.0.title': 'Search easily',
+      'feat.0.desc': 'Find the perfect gear near you with advanced filters by type, price, availability and location.',
+      'feat.1.title': 'Instant booking',
+      'feat.1.desc': 'Book in seconds from any device. No calls, no waiting. 100% digital.',
+      'feat.2.title': '100% Secure',
+      'feat.2.desc': 'All rentals are covered with included insurance. Safe and verified payments.',
+      'feat.3.title': 'Integrated chat',
+      'feat.3.desc': 'Communicate directly with the owner to resolve any doubts before booking.',
+      'feat.4.title': 'Verified reviews',
+      'feat.4.desc': 'Read real opinions from other users and make informed decisions before each rental.',
+      'feat.5.title': 'Generate income',
+      'feat.5.desc': 'Have unused gear? Put it to work and generate extra income every month safely.',
+      'stat.0.label': 'Equipment types',
+      'stat.1.label': 'Safe rental',
+      'stat.2.label': 'Immediate support',
+      // AppShowcase
+      'showcase.badge': 'How it works',
+      'showcase.title1': 'An experience',
+      'showcase.title2': 'designed for you',
+      'showcase.subtitle': 'From searching to booking, every step is designed so you can enjoy without complications.',
+      'screen.0.badge': 'Discover',
+      'screen.0.title': 'Explore categories',
+      'screen.0.desc': 'Browse through dozens of sports categories and find your ideal gear.',
+      'screen.1.badge': 'Book',
+      'screen.1.title': 'Book instantly',
+      'screen.1.desc': 'Select dates, confirm and done. Your gear awaits you in minutes.',
+      'screen.2.badge': 'Manage',
+      'screen.2.title': 'Manage everything',
+      'screen.2.desc': 'Control your bookings, messages and payments from one place.',
+      'screen.3.badge': 'Monetize',
+      'screen.3.title': 'Earn as an owner',
+      'screen.3.desc': 'List your gear, set prices and start generating extra income.',
+    },
+  };
+
+  const heroCategories: Record<string, string[]> = {
+    es: ['Kayaks', 'Tablas de Surf', 'Bicicletas', 'Paddle Surf', 'Equipos de Buceo', 'Esquís'],
+    en: ['Kayaks', 'Surfboards', 'Bicycles', 'Paddleboards', 'Diving Gear', 'Skis'],
+  };
+
+  function applyLanguage(lang: string) {
+    const dict = translations[lang];
+    if (!dict) return;
+
+    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n')!;
+      if (key in dict) el.textContent = dict[key];
+    });
+
+    document.documentElement.lang = lang;
+    localStorage.setItem('flitly-lang', lang);
+
+    window.dispatchEvent(
+      new CustomEvent('langchange', { detail: { lang, categories: heroCategories[lang] } })
+    );
+
+    document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
+      const active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  // Init: apply saved or default language
+  const saved = localStorage.getItem('flitly-lang') || 'es';
+  applyLanguage(saved);
+
+  // Button listeners
+  document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang')!;
+      applyLanguage(lang);
+    });
+  });
+</script>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    padding: 3px;
+  }
+
+  .lang-btn {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--gray-light);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .lang-btn.active {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  .lang-btn:not(.active):hover {
+    color: var(--light);
+  }
+</style>

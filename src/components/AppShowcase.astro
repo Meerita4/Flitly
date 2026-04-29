@@ -50,10 +50,10 @@ const screens = [
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="5" y="2" rx="2" width="14" height="20"/><path d="M12 18h.01"/>
         </svg>
-        Así funciona
+        <span data-i18n="showcase.badge">Así funciona</span>
       </span>
-      <h2 class="section-title">Una experiencia<br/><span class="gradient-text">pensada para ti</span></h2>
-      <p class="section-subtitle">
+      <h2 class="section-title"><span data-i18n="showcase.title1">Una experiencia</span><br/><span class="gradient-text" data-i18n="showcase.title2">pensada para ti</span></h2>
+      <p class="section-subtitle" data-i18n="showcase.subtitle">
         Desde buscar hasta reservar, cada paso está diseñado para que disfrutes sin complicaciones.
       </p>
     </div>
@@ -76,9 +76,9 @@ const screens = [
             <div class="showcase-phone-glow"></div>
           </div>
           <div class="showcase-info">
-            <span class="showcase-step-badge">{screen.badge}</span>
-            <h3 class="showcase-title">{screen.title}</h3>
-            <p class="showcase-description">{screen.description}</p>
+            <span class="showcase-step-badge" data-i18n={`screen.${index}.badge`}>{screen.badge}</span>
+            <h3 class="showcase-title" data-i18n={`screen.${index}.title`}>{screen.title}</h3>
+            <p class="showcase-description" data-i18n={`screen.${index}.desc`}>{screen.description}</p>
           </div>
         </div>
       ))}
