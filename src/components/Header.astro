@@ -19,11 +19,16 @@ import LangSwitcher from './LangSwitcher.astro';
         <LangSwitcher />
       </div>
 
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="mobile-right">
+        <div class="lang-switcher-mobile">
+          <LangSwitcher />
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
   </div>
 
@@ -239,10 +244,25 @@ import LangSwitcher from './LangSwitcher.astro';
     justify-content: center;
   }
 
+  .mobile-right {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1001;
+  }
+
+  .lang-switcher-mobile {
+    display: flex;
+  }
+
   @media (max-width: 768px) {
     .nav-links,
     .nav-actions {
       display: none;
+    }
+
+    .mobile-right {
+      display: flex;
     }
 
     .mobile-menu-btn {
