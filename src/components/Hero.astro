@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import logoSrc from '../images/logo_flitly.png';
 import inicioImg from '../images/inicio.jpg';
+import { APP_STORE_URL, PLAY_STORE_URL } from '../consts';
 
 const categories = [
   "Kayaks",
@@ -29,12 +30,6 @@ const trustBadges = [
   
   <div class="container">
     <div class="hero-content">
-      <!-- Badge -->
-      <div class="hero-badge">
-        <span class="badge-pulse"></span>
-        <span>Lanzamiento Año 2026</span>
-      </div>
-
       <!-- Main Title -->
       <h1 class="hero-title">
         Alquila
@@ -58,6 +53,30 @@ const trustBadges = [
             <span>{badge.text}</span>
           </div>
         ))}
+      </div>
+
+      <div class="store-links" aria-label="Descarga Flitly">
+        <a href={APP_STORE_URL} class="store-btn" target="_blank" rel="noopener noreferrer" aria-label="Descargar Flitly en App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M16.365 1.43c0 1.14-.417 2.153-1.251 3.038-.94 1.05-2.081 1.66-3.32 1.56-.016-.145-.024-.296-.024-.453 0-1.097.48-2.267 1.333-3.117.425-.43.966-.787 1.62-1.071.654-.284 1.272-.437 1.854-.458.016.167.024.334.024.501zm3.98 16.325c-.37.857-.755 1.643-1.155 2.355-.545.987-.99 1.67-1.336 2.051-.533.626-1.105.949-1.716.971-.438 0-1-.126-1.684-.378-.684-.252-1.313-.378-1.886-.378-.602 0-1.246.126-1.932.378-.686.252-1.24.385-1.662.401-.588.025-1.173-.307-1.756-.994-.371-.406-.836-1.114-1.397-2.126-.602-1.083-1.097-2.338-1.483-3.765-.414-1.543-.621-3.036-.621-4.478 0-1.65.356-3.074 1.068-4.269.56-.963 1.307-1.723 2.241-2.281.935-.558 1.946-.843 3.034-.859.474 0 1.096.146 1.866.438.769.292 1.263.438 1.48.438.163 0 .714-.173 1.653-.52.888-.322 1.638-.456 2.249-.401 1.655.133 2.9.786 3.734 1.959-1.48.896-2.212 2.151-2.196 3.765.013 1.257.468 2.303 1.365 3.137.407.39.861.692 1.365.905-.109.315-.224.622-.346.925z"/>
+          </svg>
+          <span>
+            <small>Descargar en</small>
+            <strong>App Store</strong>
+          </span>
+        </a>
+        <a href={PLAY_STORE_URL} class="store-btn" target="_blank" rel="noopener noreferrer" aria-label="Descargar Flitly en Google Play">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3.27 2.79c-.17.18-.27.44-.27.78v16.87c0 .34.1.6.27.78l.04.04L13.1 12 3.31 2.75l-.04.04z" fill="currentColor"/>
+            <path d="m16.36 15.09-3.26-3.09 3.27-3.09.07.04 3.86 2.19c1.1.62 1.1 1.68 0 2.3l-3.86 2.19-.08.05z" fill="currentColor"/>
+            <path d="M16.43 15.05 13.1 12 3.27 21.29c.28.3.72.34 1.21.06l11.95-6.3" fill="currentColor"/>
+            <path d="M16.43 8.95 4.48 2.65c-.49-.28-.93-.24-1.21.06L13.1 12l3.33-3.05z" fill="currentColor"/>
+          </svg>
+          <span>
+            <small>Disponible en</small>
+            <strong>Google Play</strong>
+          </span>
+        </a>
       </div>
     </div>
 
@@ -287,6 +306,55 @@ const trustBadges = [
     font-weight: 700;
   }
 
+  .store-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    color: var(--light);
+    padding: 1.05rem 1.4rem;
+    transition: all 0.2s ease;
+  }
+
+  .store-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(37, 99, 235, 0.45);
+    background: rgba(37, 99, 235, 0.16);
+  }
+
+  .store-btn svg {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    color: var(--white);
+  }
+
+  .store-btn span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .store-btn small {
+    font-size: 0.82rem;
+    color: var(--gray-light);
+  }
+
+  .store-btn strong {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
   /* Hero Visual */
   .hero-visual {
     display: flex;
@@ -428,6 +496,10 @@ const trustBadges = [
       justify-content: center;
     }
 
+    .store-links {
+      justify-content: center;
+    }
+
     .hero-visual {
       order: -1;
     }
@@ -466,6 +538,16 @@ const trustBadges = [
     .trust-badges {
       flex-direction: column;
       gap: 0.75rem;
+    }
+
+    .store-links {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .store-btn {
+      min-width: 220px;
+      justify-content: center;
     }
   }
 </style>
